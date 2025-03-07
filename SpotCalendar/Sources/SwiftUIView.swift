@@ -14,9 +14,16 @@ public struct SwiftUIView: View {
     }
 
     public var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-            .font(.H6)
-            .foregroundStyle(.blue300)
+        VStack {
+            Text("캘린더 테스트")
+                .font(.system(size: 24, weight: .bold))
+                .padding(.top, 30)
+            
+            WeekView()
+                .padding(.top, 20)
+            
+            Spacer()
+        }
     }
 }
 
