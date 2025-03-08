@@ -7,17 +7,17 @@
 
 import SwiftUI
 
-class WeekViewModel: ObservableObject {
+final class WeekViewModel: ObservableObject {
     @Published var days: [DayViewState] = []
 
-    init() {
-        generateWeekDays(for: Date())
+    init(date: Date) {
+        generateWeekDays(for: date)
     }
 
     func generateWeekDays(for baseDate: Date) {
         let calendar = Calendar.current
-        let weekday = calendar.component(.weekday, from: baseDate) - 1
-        let startOfWeek = calendar.date(byAdding: .day, value: -weekday, to: baseDate)!
+        let today = Date()
+        let startOfWeek = calendar.startOfDay(for: calendar.date(byAdding: .day, value: -(calendar.component(.weekday, from: baseDate) - 1), to: baseDate)!)
 
         days = (0..<7).map { index in
             let date = calendar.date(byAdding: .day, value: index, to: startOfWeek)!
@@ -26,7 +26,7 @@ class WeekViewModel: ObservableObject {
             return DayViewState(
                 date: dayComponent,
                 isSelected: calendar.isDate(baseDate, inSameDayAs: date),
-                time: baseDate < date ? .future : (baseDate > date ? .past : .today),
+                time: calendar.isDate(today, inSameDayAs: date) ? .today : (today < date ? .future : .past),
                 hasSpot: Bool.random()
             )
         }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct WeekView: View {
-    @StateObject private var viewModel = WeekViewModel()
+    @StateObject private var viewModel = WeekViewModel(date: Calendar.current.date(byAdding: .day, value: 0, to: Date())!)
     
     let screenWidth = UIScreen.main.bounds.width
     
