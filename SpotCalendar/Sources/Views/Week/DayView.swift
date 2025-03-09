@@ -9,8 +9,7 @@ import SwiftUI
 
 struct DayView: View {
     var state: DayViewState
-    let day: DayOfTheWeek
-    let date: Int
+    let date: Date
     
     private var textColor: Color {
         switch state.time {
@@ -37,12 +36,12 @@ struct DayView: View {
     var body: some View {
         VStack(spacing: 0) {
             VStack(spacing: 0) {
-                Text(day.rawValue)
+                Text(date.getDayOfTheWeek().rawValue)
                     .font(.B2)
                     .foregroundStyle(textColor)
                     .padding(.top, 6)
                 
-                Text("\(date)")
+                Text("\(date.getDay())")
                     .font(.H5)
                     .foregroundStyle(textColor)
                     .padding(.bottom, 3)

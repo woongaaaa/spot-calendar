@@ -19,9 +19,6 @@ public struct SwiftUIView: View {
                 .font(.system(size: 24, weight: .bold))
                 .padding(.top, 30)
             
-            WeekView()
-                .padding(.top, 20)
-            
             Spacer()
         }
     }
