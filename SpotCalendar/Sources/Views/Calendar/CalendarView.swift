@@ -120,12 +120,13 @@ struct CalendarView: View {
                             }
                             .onEnded { value in
                                 let threshold: CGFloat = weekWidth / 2
-                                withAnimation {
-                                    if value.translation.width < -threshold {
+                                let sensitivity: CGFloat = 1.3
+                                let adjustedTranslation = value.translation.width / sensitivity
+                                withAnimation(.easeInOut (duration: 0.1)) {
+                                    if adjustedTranslation < -threshold {
                                         viewModel.action(.willScrollToNextWeek(firstDay))
                                         currentWeekOffset = 0
-                                    } else if value.translation.width > threshold {
-                                        viewModel.action(.willScrollToPreviousWeek(firstDay))
+                                    } else if adjustedTranslation > threshold { viewModel.action(.willScrollToPreviousWeek(firstDay))
                                         currentWeekOffset = 0
                                     } else {
                                         currentWeekOffset = 0
